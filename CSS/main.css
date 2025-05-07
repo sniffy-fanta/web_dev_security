@@ -1,0 +1,124 @@
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #BFDAF7, #9370DB);
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.main_title {
+  width: 100%;
+  text-align: center;
+}
+
+.main_title h1 {
+  font-size: 80px;
+  font-weight: bold;
+  color: #6a1b9a;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+}
+
+.main_title hr {
+  width: 100%;
+  border: 2px solid #6a1b9a;
+  margin: 0 auto;
+}
+
+.main_wrapper {
+  flex:1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.main_container {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  padding: 40px 30px;
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+  width: 500px;
+}
+
+.user_header {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.user_header img {
+  border-radius: 50%;
+  width: 100px;
+  border: 4px solid white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.user_info {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
+}
+
+.user_info h1 {
+  margin: 0;
+  font-size: 28px;
+  color: #333;
+}
+
+.logout_btn {
+  margin-left: auto;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: bold;
+  color: #606060;
+  border: 2px solid #dcdcdc;
+  background-color: #fff;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.logout_btn:hover {
+  background-color: #f0f0f0;
+}
+
+.divider_line {
+  border-top: 1px solid #ccc;
+  width: calc(100% + 60px);
+  margin-left: -30px;
+  margin-top: 25px;
+}
+
+.nav_area {
+  background-color: #f4f4f4;
+  margin: 0 -30px -40px;
+  padding: 25px 30px;
+  border-radius: 0 0 16px 16px;
+}
+
+.nav_btn {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+.nav_btn button {
+  width: 130px;
+  padding: 12px;
+  background: linear-gradient(135deg, #4B9CD3, #9370DB);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.nav_btn button:hover {
+  filter: brightness(1.1);
+}
+

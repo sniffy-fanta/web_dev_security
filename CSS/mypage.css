@@ -1,0 +1,97 @@
+body {
+    background: linear-gradient(135deg, #BFDAF7, #9370DB);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.mypage_title {
+    width: 100%;
+    text-align: center;
+}
+  
+.mypage_title h1 {
+    font-size: 80px;
+    font-weight: bold;
+    color: #6a1b9a;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+  
+.mypage_title hr {
+    width: 100%;
+    border: 2px solid #6a1b9a;
+    margin: 0 auto;
+}
+
+.table_wrapper {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.mypage_container {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 40px 50px;
+    width: 700px;
+}
+
+.mypage_table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 18px;
+}
+
+.mypage_table th,
+.mypage_table td {
+    padding: 16px 20px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.mypage_table th {
+    background: #efe6ff;
+    font-weight: bold;
+    color: #333;
+    width: 30%;
+}
+
+.mypage_table td {
+    background: #fff;
+    color: #111;
+}
+
+.btn {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+  
+.btn button {
+    width:300px;
+    padding: 12px;
+    background: linear-gradient(135deg, #4B9CD3, #9370DB);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+  
+.btn button:hover {
+    filter: brightness(1.1);
+}
+
+.btn form {
+    display: contents;
+    margin:0;
+    padding:0;
+}

@@ -1,0 +1,62 @@
+body {
+  background: linear-gradient(135deg, #BFDAF7, #9370DB); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height:100vh;
+}
+
+.register_box{
+  background: white;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  width: 360px;
+}
+
+.register_box h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+#register_btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
+  background: linear-gradient(45deg, #4B9CD3, #9370DB); 
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-weight: bold;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#register_btn:hover {
+  filter: brightness(1.1);
+}
+
+#check_id {
+  padding: 10px 14px;
+  background: linear-gradient(45deg, #4B9CD3, #9370DB);
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+#check_id:hover {
+  filter: brightness(1.1);
+}
+
+.input_field input {
+  width: 100%;
+  padding: 12px 14px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  outline: none;
+}
