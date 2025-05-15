@@ -17,13 +17,35 @@ body {
   font-weight: bold;
   color: #6a1b9a;
   text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  margin-top:30px;
 }
 
 .main_title hr {
   width: 100%;
   border: 2px solid #6a1b9a;
   margin: 0 auto;
+}
+
+.main_title .nav {
+  display: flex;
+  justify-content: center;
+  gap: 45px;
+  margin-bottom: 15px;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.main_title .nav a {
+  text-decoration: none;
+  color: black;
+  padding: 10px 20px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.main_title .nav a:hover {
+  color:#4B9CD3
 }
 
 .main_wrapper {

@@ -1,6 +1,6 @@
 <?php
-require_once "../php/db.php";
-require_once "../php/session_guard.php";
+require_once $_SERVER['DOCUMENT_ROOT'].'/php/db.php';
+require_once $_SERVER['DOCUMENT_ROOT'].'/php/session_guard.php';
 
 $user_id = $_SESSION['user_id'];
 
@@ -26,37 +26,42 @@ if (!isset($_SESSION['temp_user_id'])) {
 <body>
     <header class="modify_title">
         <h1>Check Info</h1>
+        <div class="nav">
+            <a href="/board/board.php">회원게시판</a>
+            <a href="/pages/main.php">메인페이지</a>
+            <a href="/pages/mypage.php">마이페이지</a>
+        </div>
         <hr>
     </header>
 
     <div class="table_wrapper">
         <div class="modify_container">
-            <form action="../proc/modify_proc.php" method="POST">
+            <form action="/proc/modify_proc.php" method="POST">
                 <table class="modify_table">
                     <tr>
                         <th>아이디</th>
                         <td>
                             <input type="text" name="user_id" 
-                                value="<?= $_SESSION['temp_user_id'] ?>" readonly onclick="edit(this);">
-                            <button type="submit" formaction="../pages/modify.php" name="action" value="check" id="check_id">중복확인</button>
+                                value="<?= $_SESSION['temp_user_id'] ?>" autocomplete="off" readonly onclick="edit(this);">
+                            <button type="submit" formaction="/pages/modify.php" name="action" value="check" id="check_id">중복확인</button>
                         </td>
                     </tr>
                     <tr>
                         <th>비밀번호</th>
                         <td>
-                            <input type="password" name="user_pw" value="<?= $row['userpw'] ?>" readonly onclick="edit(this);">
+                            <input type="password" name="user_pw" value="<?= $row['userpw'] ?>" autocomplete="off" readonly onclick="edit(this);">
                         </td>
                     </tr>
                     <tr>
                         <th>이름</th>
                         <td>
-                            <input type="text" name="name" value="<?= $row['name'] ?>" readonly onclick="edit(this);">
+                            <input type="text" name="name" value="<?= $row['name'] ?>" autocomplete="off" readonly onclick="edit(this);">
                         </td>
                     </tr>
                     <tr>
                         <th>주소</th>
                         <td>
-                            <input type="text" name="address" value="<?= $row['address'] ?>" readonly onclick="edit(this);">
+                            <input type="text" name="address" value="<?= $row['address'] ?>" autocomplete="off" readonly onclick="edit(this);">
                         </td>
                     </tr>
                 </table>

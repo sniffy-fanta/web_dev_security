@@ -1,6 +1,6 @@
 <?php
-    require_once "../php/db.php";
-    require_once "../php/session_guard.php";
+    require_once $_SERVER['DOCUMENT_ROOT'].'/php/db.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/php/session_guard.php';
 
     //수정값 변수에 할당
     $user_id = $_POST['user_id'];
@@ -53,7 +53,7 @@
             echo "
                 <script>
                     alert('수정이 완료되었습니다.'); 
-                    location.href='../pages/mypage.php';
+                    location.href='/pages/mypage.php';
                 </script>";
         }else{
             unset($_SESSION['temp_user_id']);
@@ -68,6 +68,6 @@
         echo "
             <script>
                 alert('변경사항이 없습니다.');
-                location.href='../pages/mypage.php';
+                location.href='/pages/mypage.php';
             </script>";
     }

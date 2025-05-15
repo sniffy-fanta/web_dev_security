@@ -10,14 +10,14 @@
 <body>
     <div class="register_box">
         <h2>회원가입</h2>
-        <form action="../proc/register_proc.php" method="POST">
+        <form action="/proc/register_proc.php" method="POST">
             <div class="input_field">
-                <input type="text" name="user_id" placeholder="아이디" required>
+                <input type="text" name="user_id" placeholder="아이디" autocomplete="off" required>
                 <button type="submit" name="action" value="check" id="check_id">중복확인</button>
 
-                <input type="password" name="user_pw" placeholder="비밀번호" required>
-                <input type="text" name="name" placeholder="이름" required>
-                <input type="text" name="address" placeholder="주소" required>
+                <input type="password" name="user_pw" placeholder="비밀번호" autocomplete="off" required>
+                <input type="text" name="name" placeholder="이름" autocomplete="off" required>
+                <input type="text" name="address" placeholder="주소" autocomplete="off" required>
                 <button type="submit" name="action" value="register" id="register_btn">가입하기</button>
             </div>
         </form>

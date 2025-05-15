@@ -6,7 +6,7 @@
 </head>
 <body>
     <script>alert("아이디 또는 비밀번호가 틀렸습니다.");
-        location.href="../pages/login.php";
+        location.href="/pages/login.php";
     </script>
 </body>
 </html>

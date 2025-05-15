@@ -1,5 +1,5 @@
 <?php
-require_once "../php/session_guard.php";
+require_once $_SERVER['DOCUMENT_ROOT'].'/php/session_guard.php';
 $user_id = $_SESSION['user_id'];
 ?>
 
@@ -14,6 +14,11 @@ $user_id = $_SESSION['user_id'];
 <body>
     <header class="main_title">
         <h1>MAIN</h1>
+        <div class="nav">
+            <a href="/board/board.php">회원게시판</a>
+            <a href="/pages/main.php">메인페이지</a>
+            <a href="/pages/mypage.php">마이페이지</a>
+        </div>
         <hr>
     </header>
     <div class="main_wrapper">
@@ -22,14 +27,14 @@ $user_id = $_SESSION['user_id'];
                 <img src="https://static.nid.naver.com/images/web/user/default.png?type=s160">    
                 <div class="user_info">
                     <h1><?= $user_id."님" ?></h1>
-                    <span class="logout_btn" onclick="location.href='../proc/logout.php'">로그아웃</span>
+                    <span class="logout_btn" onclick="location.href='/proc/logout.php'">로그아웃</span>
                 </div>
             </div>
             <div class="divider_line"></div>   
             <div class="nav_area">
                 <div class="nav_btn">
-                    <button onclick="location.href='../pages/mypage.php'">마이페이지</button>
-                    <button onclick="location.href='../pages/board.php'">게시판</button>
+                    <button onclick="location.href='/pages/mypage.php'">마이페이지</button>
+                    <button onclick="location.href='/board/board.php'">게시판</button>
                 </div>
             </div>
         </div>

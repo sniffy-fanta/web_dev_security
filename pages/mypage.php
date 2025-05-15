@@ -1,8 +1,8 @@
 <?php
     //DB시작
-    require_once "../php/db.php";
+    require_once $_SERVER['DOCUMENT_ROOT'].'/php/db.php';
     //세션시작 및 만료시간 설정
-    require_once "../php/session_guard.php";
+    require_once $_SERVER['DOCUMENT_ROOT'].'/php/session_guard.php';
     $user_id = $_SESSION['user_id'];
     //아이디,이름,주소 DB에서 조회
     $sql = "SELECT userid,name,address FROM users WHERE userid='$user_id'";
@@ -21,6 +21,11 @@
 <body>
     <header class="mypage_title">
         <h1>My Page</h1>
+        <div class="nav">
+            <a href="/board/board.php">회원게시판</a>
+            <a href="/pages/main.php">메인페이지</a>
+            <a href="/pages/mypage.php">마이페이지</a>
+        </div>
         <hr>
     </header>
     <div class="table_wrapper">
@@ -43,9 +48,8 @@
                 </tr>
             </table>
             <div class="btn">
-                <button onclick="location.href='../pages/modify.php'">수정하기</button> 
-                <button onclick="location.href='../pages/main.php'">메인페이지</button>
-                <form action="../proc/delete.php" method="POST" onclick="return confirm('정말 탈퇴하시겠습니까?')">
+                <button onclick="location.href='/pages/modify.php'">수정하기</button> 
+                <form action="/proc/delete.php" method="POST" onclick="return confirm('정말 탈퇴하시겠습니까?')">
                     <button type="submit">탈퇴하기</button>
                 </form>
             </div>

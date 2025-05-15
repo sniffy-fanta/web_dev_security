@@ -1,0 +1,156 @@
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #BFDAF7, #9370DB);
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+  
+.board_title {
+    width: 100%;
+    text-align: center;
+}
+  
+.board_title h1 {
+    font-size: 80px;
+    font-weight: bold;
+    color: #6a1b9a;
+    text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    margin-top: 30px
+}
+  
+.board_title hr {
+    width: 100%;
+    border: 2px solid #6a1b9a;
+    margin: 0 auto;
+}
+
+.board_title .nav {
+    display: flex;
+    justify-content: center;
+    gap: 45px;
+    margin-bottom: 15px;
+    font-size: 17px;
+    font-weight: bold;
+}
+  
+.board_title .nav a {
+    text-decoration: none;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+}
+
+.board_title .nav a:hover {
+    color:#4B9CD3
+}
+
+.write_btn1 {
+    display: flex;
+    justify-content: flex-end;
+    margin-top:25px;
+    margin-right:200px;
+}
+
+.write_btn1 a {
+    width:80px;
+    text-align: center;
+    text-decoration:none;
+    padding: 12px;
+    background: linear-gradient(45deg, #4B9CD3, #9370DB); 
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.write_btn1 a:hover {
+    filter:brightness(1.1);
+}
+
+.board_table {
+    width:55%;
+    text-align: center;
+    margin: 30px auto;
+    margin-top: 25px;
+    border-collapse: collapse;
+    font-size: 20px;
+}
+
+.board_table th {
+    border-bottom:none;
+    color: #4B0082;
+}
+
+.board_table td {
+  padding: 25px 16px;
+  border-bottom: 2px solid black;
+}
+
+.board_table thead {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+#emot {
+    font-size: 40px;
+}
+
+.write_wrapper {
+    width:55%;
+    margin: 50px auto;
+}
+
+.write_wrapper form {
+    display:flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.write_wrapper input,textarea {
+    width:100%;
+    font-weight:bold;
+    box-sizing: border-box;
+    border:none;
+    border-bottom: 2px solid black;
+    background-color: transparent;
+    outline:none;
+    padding:10px;
+}
+
+.write_wrapper input {
+    font-size:25px;
+}
+
+.write_wrapper textarea {
+  min-height:450px;
+  resize: vertical;
+  margin-bottom:20px;
+  font-size:15px;
+}
+
+.write_btn2 button {
+    float:right;
+    padding: 12px;
+    background: linear-gradient(45deg, #4B9CD3, #9370DB); 
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.write_btn2 button:hover {
+    filter: brightness(1.1);
+}

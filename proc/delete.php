@@ -1,12 +1,12 @@
 <?php
-    require_once "../php/db.php";
+    require_once $_SERVER['DOCUMENT_ROOT'].'/php/db.php';
     session_start();
     $user_id = $_SESSION['user_id'];
 
     if(!$user_id){
         echo "<script>
             alert('다시 로그인해주세요.');
-            location.href='../pages/login.php';
+            location.href='/pages/login.php';
             </script>";
             exit;
     }
@@ -22,7 +22,7 @@
 
         echo "<script>
             alert('탈퇴 되었습니다.');
-            location.href='../pages/login.php';
+            location.href='/pages/login.php';
             </script>";
     }
     else{

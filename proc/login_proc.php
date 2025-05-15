@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once "../php/db.php";
+require_once $_SERVER['DOCUMENT_ROOT'].'/php/db.php';
 
 //입력값 변수에 저장하기
 $user_id = $_POST['user_id'];

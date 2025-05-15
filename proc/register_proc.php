@@ -1,8 +1,7 @@
 <?php
-    require_once '../php/validation.php';
-    require_once '../php/db.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/php/validation.php';
+    require_once $_SERVER['DOCUMENT_ROOT'].'/php/db.php';
 
-    mysqli_report(MYSQLI_REPORT_OFF); //쿼리 실패시 FALSE반환
 
     //버튼확인
     $action =$_POST['action'];
@@ -53,7 +52,7 @@
             echo "
             <script>
                 alert('회원가입 성공');
-                location.href='../pages/login.php';
+                location.href='/pages/login.php';
             </script>";
             exit;
          }
