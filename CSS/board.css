@@ -48,6 +48,12 @@ body {
     color:#4B9CD3
 }
 
+#title_link {
+    text-decoration:none; 
+    color:#1073b4; 
+    font-weight:bold;
+}
+
 .write_btn1 {
     display: flex;
     justify-content: flex-end;
@@ -133,10 +139,10 @@ body {
 }
 
 .write_wrapper textarea {
-  min-height:450px;
-  resize: vertical;
-  margin-bottom:20px;
-  font-size:15px;
+    min-height:450px;
+    resize: none;
+    margin-bottom:20px;
+    font-size:15px;
 }
 
 .write_btn2 button {
@@ -170,11 +176,80 @@ body {
 }
 
 .page_wrapper a:hover {
-  color: #1073b4;
-  cursor:pointer;
+    color: #1073b4;
+    cursor:pointer;
 }
 
 .page_wrapper .active {
-  color: #1073b4;
-  pointer-events: none;
+    color: #1073b4;
+    pointer-events: none;
+}
+
+.read_wrapper {
+    width:55%;
+    margin: 50px auto;
+    display:flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.read_content p {
+    width:100%;
+    font-weight:bold;
+    box-sizing: border-box;
+    border:none;
+    border-bottom: 2px solid black;
+    background-color: transparent;
+    outline:none;
+    padding:10px;
+}
+
+.read_title p {
+    width:100%;
+    font-weight:bold;
+    box-sizing: border-box;
+    border:none;
+    background-color: transparent;
+    outline:none;
+    font-size:25px;
+    padding: 10px;
+    margin: 0;
+}
+
+.post_meta {
+    border-bottom: 2px solid black;
+    padding-left:10px;
+    padding-bottom:5px;
+    font-size: 15px;
+    color: #888;
+}
+
+.read_content p {
+    height:424px;
+    overflow: auto;
+    resize: none;
+    margin-top: 0;
+    margin-bottom:20px;
+    font-size:15px;
+}
+
+.btn3 button {
+    float:right;
+    padding: 12px;
+    background: linear-gradient(45deg, #4B9CD3, #9370DB); 
+    border: none;
+    border-radius: 8px;
+    margin-left:20px;
+    color: white;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn3 button:hover {
+    filter: brightness(1.1);
 }

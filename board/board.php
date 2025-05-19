@@ -68,7 +68,7 @@
         ?>
             <tr>
                 <td><?= $row['idx']; ?></td>
-                <td><?= $row['title']; ?></td>
+                <td><a id="title_link" href="/board/board_read.php?idx=<?=$row['idx']?>"><?= $row['title']; ?></a></td>
                 <td><?= $row['author']; ?></td>
                 <td><?= $row['post_date']; ?></td>
                 <td><?= $row['views']; ?></td>
@@ -79,7 +79,6 @@
     </table>   
     <div class="page_wrapper"> 
         <?php
-        $page_num = 1;
 
         //처음 블럭으로
         if($current_block>1){
