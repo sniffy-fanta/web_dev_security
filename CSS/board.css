@@ -80,17 +80,18 @@ body {
     margin: 30px auto;
     margin-top: 25px;
     border-collapse: collapse;
-    font-size: 20px;
 }
 
 .board_table th {
+    font-size:20px;
     border-bottom:none;
     color: #4B0082;
 }
 
 .board_table td {
-  padding: 25px 16px;
-  border-bottom: 2px solid black;
+    font-size:16px;
+    padding: 14px 8px;
+    border-bottom: 2px solid black;
 }
 
 .board_table thead {
@@ -153,4 +154,27 @@ body {
 
 .write_btn2 button:hover {
     filter: brightness(1.1);
+}
+
+.page_wrapper {
+    text-align: center;
+}
+
+.page_wrapper a {
+    display:inline-block;
+    text-decoration: none;
+    color:#2c2c2c;
+    font-weight: bold;
+    padding:0px 6px;
+    transition: color 0.3s ease;
+}
+
+.page_wrapper a:hover {
+  color: #1073b4;
+  cursor:pointer;
+}
+
+.page_wrapper .active {
+  color: #1073b4;
+  pointer-events: none;
 }
