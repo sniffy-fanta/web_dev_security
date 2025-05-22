@@ -6,9 +6,10 @@
     $title = $_POST['title'];
     $content = $_POST['content'];
     $author = $_SESSION['user_id'];
+    $upload_file = $_FILES['upload_file'];
     
     //DB 데이터 저장
-    $sql = "INSERT INTO board (title,author,content,post_date,views,likes) VALUES ('$title','$author','$content',now(),0,0)";
+    $sql = "INSERT INTO board (title,author,content,post_date,file,views,likes) VALUES ('$title','$author','$content',now(),0,0)";
     $result = $mysqli->query($sql);
 
     if($result){

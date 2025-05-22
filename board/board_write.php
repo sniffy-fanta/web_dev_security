@@ -22,10 +22,10 @@
         <hr>
     </header>
     <div class="write_wrapper">
-        <form action="/board/board_write_proc.php" method="POST">
+        <form action="/board/board_write_proc.php" method="POST" enctype="multipart/form-data">
             <input type="text" name="title" placeholder="제목" required>
             <textarea name="content" placeholder="내용을 입력하세요."></textarea>
-            
+            <input type="file" name="upload_file" id="file_btn">
             <div class="write_btn2">
                 <button type="submit">작성하기</button>
             </div>
