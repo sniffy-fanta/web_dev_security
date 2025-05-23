@@ -1,8 +1,8 @@
 body {
     margin: 0;
     background: linear-gradient(135deg, #BFDAF7, #9370DB);
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
 }
@@ -139,7 +139,8 @@ body {
 }
 
 .write_wrapper textarea {
-    min-height:450px;
+    height: 450px;  /* min-height → height */
+    overflow-y: auto;
     resize: none;
     font-size:15px;
 }
@@ -191,7 +192,7 @@ body {
 
 .read_wrapper {
     width:55%;
-    margin: 50px auto;
+    margin: 50px auto 80px;
     display:flex;
     flex-direction: column;
     background-color: rgba(255, 255, 255, 0.85);
@@ -240,8 +241,14 @@ body {
     font-size:15px;
 }
 
+.btn3 {
+    text-align: right;
+    margin-top: 10px;
+}
+
 .btn3 button {
-    float:right;
+    float: none;
+    display: inline-block;
     padding: 12px;
     background: linear-gradient(45deg, #4B9CD3, #9370DB); 
     border: none;
