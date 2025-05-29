@@ -24,6 +24,7 @@
             alert('탈퇴 되었습니다.');
             location.href='/pages/login.php';
             </script>";
+            exit;
     }
     else{
         echo "<script>
