@@ -6,7 +6,6 @@
     $title = $_POST['title'];
     $content = $_POST['content'];
 
-    $sql = null; // 쿼리 변수 선언
 
     // 기존 파일명 조회
     $query = "SELECT file FROM board WHERE idx = $post_id";
@@ -14,7 +13,7 @@
     $row = $result->fetch_assoc();
     $existing_file = $row ? $row['file'] : null;
 
-    // 1. 파일 삭제 체크 시
+    // 파일 삭제 체크 시
     if (isset($_POST['delete_file']) && $_POST['delete_file'] == '1') {
         // 실제 파일 삭제 (파일이 존재할 때만)
         if ($existing_file && file_exists($_SERVER['DOCUMENT_ROOT']."/board/uploads/".$existing_file)) {
@@ -24,7 +23,7 @@
         $sql = "UPDATE board SET title='$title', content='$content', file=NULL WHERE idx=$post_id";
     }
 
-    // 2. 파일 업로드 처리
+    // 파일 업로드 처리
     else if (isset($_FILES['upload_file']) && $_FILES['upload_file']['error'] !== UPLOAD_ERR_NO_FILE) {
         $filename = $_FILES['upload_file']['name'];
         $tmp_path = $_FILES['upload_file']['tmp_name'];
@@ -55,7 +54,7 @@
             exit;
         }
     }
-    // 3. 파일 변경 없이 텍스트만 수정
+    // 파일 변경 없이 텍스트만 수정
     else {
         $sql = "UPDATE board SET title='$title', content='$content' WHERE idx=$post_id";
     }
