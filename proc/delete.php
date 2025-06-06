@@ -22,7 +22,7 @@
 
         echo "<script>
             alert('탈퇴 되었습니다.');
-            location.href='/pages/login.php';
+            location.replace('/pages/login.php');
             </script>";
             exit;
     }

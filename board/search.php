@@ -24,6 +24,10 @@
     $start_block = ($current_block-1)*$per_block+1;//지금 블럭의 시작 페이지 번호
     $end_block = min(($start_block + $per_block -1),$total_page);//지금 블럭의 마지막 페이지 번호
 
+    $cate = $_GET['cate'];
+    $search = $_GET['search'];
+    $start_date = $_GET['start_date'];
+    $end_date = $_GET['end_date'];
     
 ?>
 
@@ -46,7 +50,7 @@
         </div>
         <hr>
     </header>
-    <form action="/board/search.php" method="GET">
+    <form action="/board/board.php" method="GET">
         <select name="cate" id="search_opt">
             <option value="title">제목</option>
             <option value="author">작성자</option>

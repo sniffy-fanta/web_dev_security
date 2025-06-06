@@ -81,6 +81,7 @@
                     <button type="submit">수정하기</button>
                 </form>
                 <form action="/board/board_delete.php" method="POST">
+                    <input type="hidden" name="idx" value="<?= $row['idx']?>">
                     <button type="submit">삭제하기</button>
                 </form>
             </div>
