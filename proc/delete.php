@@ -14,6 +14,10 @@
     //데이터베이스ID와 세션유저ID값이 같다면 해당 행 삭제
     $sql = "DELETE FROM users WHERE userid='$user_id'";
     $result = $mysqli->query($sql);
+    $sql = "DELETE FROM post_likes WHERE userid='$user_id'";
+    $result = $mysqli->query($sql);
+    $sql = "DELETE FROM board WHERE userid='$user_id'";
+    $result = $mysqli->query($sql);
 
     //sql이 실행이 됐다면
     if($result){

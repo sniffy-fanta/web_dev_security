@@ -7,6 +7,7 @@
     $action =$_POST['action'];
     $user_id = trim($_POST['user_id']); //check,register 둘 다 쓰여서 전역변수로 선언
 
+
     if($action === 'check'){
         //중복확인
         $check_sql= "SELECT userid FROM users WHERE userid='$user_id'";
@@ -36,7 +37,7 @@
          $user_pw = trim($_POST['user_pw']);
          $name = trim($_POST['name']);
          $address = trim($_POST['address']);
-
+        
          $error = validation_input($user_id,$user_pw,$name,$address);
             if($error !== ''){
                 echo "<script>alert('$error');

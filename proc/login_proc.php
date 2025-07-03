@@ -16,6 +16,7 @@ if($result && $result->num_rows >0){
 
     if($row['userpw']===$user_pw){
         //DB비밀번호와 입력한 비밀번호가 같을 시 세션저장
+        session_regenerate_id(true);
         $_SESSION['user_id'] = $user_id;
         header("Location:/pages/main.php");
         exit;
