@@ -109,12 +109,12 @@
         while($row = $res_page->fetch_assoc()){
         ?>
             <tr>
-                <td><?= $row['idx']; ?></td>
-                <td><a id="title_link" href="/board/board_read.php?idx=<?=$row['idx']?>"><?= $row['title']; ?></a></td>
-                <td><?= $row['author']; ?></td>
-                <td><?= $row['post_date']; ?></td>
-                <td><?= $row['views']; ?></td>
-                <td><?= $row['likes']; ?></td>
+                <td><?= htmlspecialchars($row['idx'], ENT_QUOTES, 'UTF-8') ?></td>
+                <td><a id="title_link" href="/board/board_read.php?idx=<?=htmlspecialchars($row['idx'], ENT_QUOTES, 'UTF-8')?>"><?= htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8') ?></a></td>
+                <td><?= htmlspecialchars($row['author'], ENT_QUOTES, 'UTF-8') ?></td>
+                <td><?= htmlspecialchars($row['post_date'], ENT_QUOTES, 'UTF-8') ?></td>
+                <td><?= htmlspecialchars($row['views'], ENT_QUOTES, 'UTF-8') ?></td>
+                <td><?= htmlspecialchars($row['likes'], ENT_QUOTES, 'UTF-8') ?></td>
             </tr>
         <?php } ?>
         </tbody>

@@ -45,21 +45,21 @@
     </header>
     <div class="write_wrapper">
         <form action="/board/board_modify_proc.php" method="POST" enctype="multipart/form-data">
-            <input type="text" name="title" value="<?=$row['title']?>" required>
-            <textarea name="content"><?=$row['content']?></textarea>
+            <input type="text" name="title" value="<?=htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8')?>" required>
+            <textarea name="content"><?=htmlspecialchars($row['content'], ENT_QUOTES, 'UTF-8')?></textarea>
             <?php if (!empty($row['file'])): ?>
                 <input type="file" name="upload_file" id="file_btn">
                 <div class="write_btn2">
-                    현재 파일: <?=$row['file']?>
+                    현재 파일: <?=htmlspecialchars($row['file'], ENT_QUOTES, 'UTF-8')?>
                     <br>
                     파일 삭제 <input type="checkbox" name="delete_file" value="1">
-                    <input type="hidden" name="idx" value="<?=$row['idx']?>">
+                    <input type="hidden" name="idx" value="<?=htmlspecialchars($row['idx'], ENT_QUOTES, 'UTF-8')?>">
                     <button type="submit">수정하기</button>
                 </div>
             <?php else: ?>
                 <input type="file" name="upload_file" id="file_btn">
                 <div class="write_btn2">
-                    <input type="hidden" name="idx" value="<?=$row['idx']?>">
+                    <input type="hidden" name="idx" value="<?=htmlspecialchars($row['idx'], ENT_QUOTES, 'UTF-8')?>">
                     <button type="submit">수정하기</button>
                 </div>
             <?php endif; ?>

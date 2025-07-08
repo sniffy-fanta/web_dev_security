@@ -48,19 +48,19 @@
     </header>
     <div class="read_wrapper">
         <div class="read_title">
-            <p><?=$row['title'] ?>
+            <p><?=htmlspecialchars($row['title'], ENT_QUOTES, 'UTF-8') ?>
             <div class="post_meta">
-                작성자: <?=$row['author']?> | 작성일: <?=$row['post_date']?> | 조회수<?=$row['views']?> 좋아요<?=$row['likes']?>
+                작성자: <?=htmlspecialchars($row['author'], ENT_QUOTES, 'UTF-8')?> | 작성일: <?=htmlspecialchars($row['post_date'], ENT_QUOTES, 'UTF-8')?> | 조회수<?=htmlspecialchars($row['views'], ENT_QUOTES, 'UTF-8')?> 좋아요<?=htmlspecialchars($row['likes'], ENT_QUOTES, 'UTF-8')?>
                 <?php if($user_id && $user_id !== $row['author']): ?>
                     <span class="like_btn">
                     <?php if($likes): ?>
                         <form action="/board/unlike.php" method="POST">
-                            <input type="hidden" name="post_id" value=<?= $row['idx']?>>
+                            <input type="hidden" name="post_id" value=<?= htmlspecialchars($row['idx'], ENT_QUOTES, 'UTF-8')?>>
                             <button type="submit" class="unlike"><i class="fa-solid fa-heart"></i></button>
                         </form>
                     <?php else: ?>
                         <form action="/board/like.php" method="POST">
-                            <input type="hidden" name="post_id" value=<?= $row['idx']?>>
+                            <input type="hidden" name="post_id" value=<?= htmlspecialchars($row['idx'], ENT_QUOTES, 'UTF-8')?>>
                             <button type="submit" class="like"><i class="fa-regular fa-heart"></i></button>
                         </form>
                     <?php endif; ?>
@@ -69,19 +69,19 @@
             </div>
         </div>
         <div class="read_content">
-            <p><?=nl2br($row['content'])?></p>
+            <p><?=nl2br(htmlspecialchars($row['content'], ENT_QUOTES, 'UTF-8'))?></p>
         </div>
         <div class="download_file">
-            <a href="/board/uploads/<?= $row['file']?>"download><?= $row['file']?></a>
+            <a href="/board/uploads/<?= htmlspecialchars($row['file'], ENT_QUOTES, 'UTF-8')?>"download><?= htmlspecialchars($row['file'], ENT_QUOTES, 'UTF-8')?></a>
         </div>
-        <?php if($user_id === $row['author']):?>
+        <?php if($user_id === htmlspecialchars($row['author'], ENT_QUOTES, 'UTF-8')):?>
             <div class="btn3">
                 <form action="/board/board_modify.php" method="GET">
-                    <input type="hidden" name="idx" value="<?= $row['idx']?>">
+                    <input type="hidden" name="idx" value="<?= htmlspecialchars($row['idx'], ENT_QUOTES, 'UTF-8')?>">
                     <button type="submit">수정하기</button>
                 </form>
                 <form action="/board/board_delete.php" method="POST">
-                    <input type="hidden" name="idx" value="<?= $row['idx']?>">
+                    <input type="hidden" name="idx" value="<?= htmlspecialchars($row['idx'], ENT_QUOTES, 'UTF-8')?>">
                     <button type="submit">삭제하기</button>
                 </form>
             </div>

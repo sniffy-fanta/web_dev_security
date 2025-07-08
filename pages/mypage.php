@@ -34,17 +34,17 @@
                 <tr>
                     <th>아이디</th>
                     <!--DB에서 아이디 가져온 값-->
-                    <td><?= $row['userid'] ?></td>
+                    <td><?= htmlspecialchars($row['userid'], ENT_QUOTES, 'UTF-8') ?></td>
                 </tr>
                 <tr>
                     <th>이름</th>
                     <!--DB에서 이름 가져온 값-->
-                    <td><?= $row['name'] ?></td>
+                    <td><?= htmlspecialchars($row['name'], ENT_QUOTES, 'UTF-8') ?></td>
                 </tr>
                 <tr>
                     <th>주소</th>
                     <!--DB에서 주소 가져온 값-->
-                    <td><?= $row['address'] ?></td>
+                    <td><?= htmlspecialchars($row['address'], ENT_QUOTES, 'UTF-8') ?></td>
                 </tr>
             </table>
             <div class="btn">

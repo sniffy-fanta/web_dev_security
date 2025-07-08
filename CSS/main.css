@@ -1,8 +1,15 @@
 body {
   margin: 0;
   background: linear-gradient(135deg, #BFDAF7, #9370DB);
-  height: 100vh;
-  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #BFDAF7, #9370DB);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }

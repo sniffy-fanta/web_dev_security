@@ -1,7 +1,6 @@
 body {
     background: linear-gradient(135deg, #BFDAF7, #9370DB);
-    height: 100vh;
-    overflow: hidden;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }

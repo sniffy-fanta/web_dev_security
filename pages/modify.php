@@ -42,26 +42,26 @@ if (!isset($_SESSION['temp_user_id'])) {
                         <th>아이디</th>
                         <td>
                             <input type="text" name="user_id" 
-                                value="<?= $_SESSION['temp_user_id'] ?>" autocomplete="off" readonly onclick="edit(this);">
+                                value="<?= htmlspecialchars($_SESSION['temp_user_id'], ENT_QUOTES, 'UTF-8') ?>" autocomplete="off" readonly onclick="edit(this);">
                             <button type="submit" formaction="/pages/modify.php" name="action" value="check" id="check_id">중복확인</button>
                         </td>
                     </tr>
                     <tr>
                         <th>비밀번호</th>
                         <td>
-                            <input type="password" name="user_pw" value="<?= $row['userpw'] ?>" autocomplete="off" readonly onclick="edit(this);">
+                            <input type="password" name="user_pw" value="<?= htmlspecialchars($row['userpw'], ENT_QUOTES, 'UTF-8') ?>" autocomplete="off" readonly onclick="edit(this);">
                         </td>
                     </tr>
                     <tr>
                         <th>이름</th>
                         <td>
-                            <input type="text" name="name" value="<?= $row['name'] ?>" autocomplete="off" readonly onclick="edit(this);">
+                            <input type="text" name="name" value="<?= htmlspecialchars($row['name'], ENT_QUOTES, 'UTF-8') ?>" autocomplete="off" readonly onclick="edit(this);">
                         </td>
                     </tr>
                     <tr>
                         <th>주소</th>
                         <td>
-                            <input type="text" name="address" value="<?= $row['address'] ?>" autocomplete="off" readonly onclick="edit(this);">
+                            <input type="text" name="address" value="<?= htmlspecialchars($row['address'], ENT_QUOTES, 'UTF-8') ?>" autocomplete="off" readonly onclick="edit(this);">
                         </td>
                     </tr>
                 </table>

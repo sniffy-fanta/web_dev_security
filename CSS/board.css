@@ -386,3 +386,107 @@ a:hover {
 .btn3 button:hover {
     filter: brightness(1.1);
 }
+
+.btn_style, a.btn_style {
+  width: auto;
+  min-width: 88px;
+}
+
+.btn_style:hover,
+a.btn_style:hover {
+  filter: brightness(1.1);
+  text-decoration: none !important;
+  color: white !important;
+}
+
+@media (max-width: 1200px) {
+  .write_btn {
+    position: static !important;
+    right: auto !important;
+    top: auto !important;
+    left: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    margin-top: 10px !important;
+    margin-left: 0 !important;
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    z-index: 10 !important;
+  }
+  .search_bar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+    padding: 18px 10px !important;
+  }
+  .search_bar input[type="text"] {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  .btn_style,
+  a.btn_style {
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+  .search_wrapper,
+  .board_table {
+    width: 95% !important;
+    min-width: unset !important;
+  }
+}
+
+.btn_style, a.btn_style {
+  width: auto;
+  min-width: 88px;
+}
+
+.btn_style:hover,
+a.btn_style:hover {
+  filter: brightness(1.1);
+  text-decoration: none !important;
+  color: white !important;
+}
+
+@media (max-width: 1200px) {
+  .write_btn {
+    position: static !important;
+    right: auto !important;
+    top: auto !important;
+    left: auto !important;
+    bottom: auto !important;
+    transform: none !important;
+    margin-top: 10px !important;
+    margin-left: 0 !important;
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    z-index: 10 !important;
+  }
+  .search_bar {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 12px !important;
+    padding: 18px 10px !important;
+  }
+  .search_bar input[type="text"] {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  .btn_style,
+  a.btn_style {
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+  .search_wrapper,
+  .board_table {
+    width: 95% !important;
+    min-width: unset !important;
+  }
+}
