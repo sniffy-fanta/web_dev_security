@@ -21,7 +21,7 @@
             echo "<script>alert('허용되지 않는 파일 형식입니다.'); history.back();</script>";
             exit;
         }
-
+        
         $unique_idx = uniqid('', true);//랜덤값
         $unique_filename = $unique_idx . '.' . $ext;//랜덤값+확장자
         $file_path = $_SERVER['DOCUMENT_ROOT'] . "/board/uploads/" . $unique_filename;//저장할 파일 경로
