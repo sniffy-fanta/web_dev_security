@@ -1,4 +1,5 @@
 <?php
+    require_once $_SERVER['DOCUMENT_ROOT'].'/php/validation.php';
     require_once $_SERVER['DOCUMENT_ROOT'].'/php/db.php';
     require_once $_SERVER['DOCUMENT_ROOT'].'/php/session_guard.php';
 
@@ -7,6 +8,15 @@
     $user_pw = $_POST['user_pw'];
     $name = $_POST['name'];
     $address = $_POST['address'];
+
+    $error = validation_input($user_id, $user_pw, $name, $address);
+    if ($error !== '') {
+        echo "<script>alert('$error');
+        history.back();
+        </script>";
+        exit;
+    }
+
 
     //기존 사용자 정보 가져오기
     $session_user_id = $_SESSION['user_id'];
