@@ -30,7 +30,7 @@
     $stmt->close();
 
     //sql이 실행이 됐다면
-    if($result){
+    if($result1 && $result2 && $result3){
         session_unset(); //변수삭제
         session_destroy(); //세션초기화
 
