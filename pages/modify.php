@@ -2,11 +2,22 @@
 require_once $_SERVER['DOCUMENT_ROOT'].'/php/db.php';
 require_once $_SERVER['DOCUMENT_ROOT'].'/php/session_guard.php';
 
+if (!isset($_SESSION['user_id'])) {
+    echo "<script>
+            alert('로그인이 필요합니다.');
+            location.href='/pages/login.php';
+          </script>";
+    exit;
+}
+
 $user_id = $_SESSION['user_id'];
 
 // DB 조회
-$sql = "SELECT userid, userpw, name, address FROM users WHERE userid='$user_id'";
-$result = $mysqli->query($sql);
+$sql = "SELECT userid, userpw, name, address FROM users WHERE userid=?";
+$stmt = $mysqli->prepare($sql);
+$stmt->bind_param("s", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
 $row = $result->fetch_assoc();
 
 // 임시세션 temp_user_id 세팅
@@ -89,16 +100,21 @@ if (isset($_POST['action']) && $_POST['action'] === 'check') {
     }
 
     // 중복검사
-    $check_sql = "SELECT userid FROM users WHERE userid='$check_user_id'";
-    $result_id = $mysqli->query($check_sql);
+    $check_sql = "SELECT userid FROM users WHERE userid=?";
+    $stmt = $mysqli->prepare($check_sql);
+    $stmt->bind_param("s", $check_user_id);
+    $stmt->execute();
+    $result_id = $stmt->get_result();
 
     if ($result_id && $result_id->num_rows > 0) {
         unset($_SESSION['temp_user_id']);
         echo "<script>alert('중복된 아이디입니다.'); history.back();</script>";
+        $stmt->close();
         exit;
     } else {
         $_SESSION['temp_user_id'] = $check_user_id;
         echo "<script>alert('사용 가능한 아이디입니다.'); history.back();</script>";
+        $stmt->close();
         exit;
     }
 }

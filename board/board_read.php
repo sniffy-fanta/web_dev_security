@@ -3,23 +3,32 @@
     session_start();
 
     $post_id = $_GET['idx'];
-    $sql = "SELECT * FROM board WHERE idx=$post_id";
-    $result = $mysqli->query($sql);
+
+    $sql = "SELECT * FROM board WHERE idx=?";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("i", $post_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
     $row = $result->fetch_assoc();
 
     $user_id = $_SESSION['user_id'];
 
     if($user_id != $row['author']){
-	    $sql_views = "UPDATE board SET  views = views + 1 WHERE idx=$post_id";
-	    $result_views = $mysqli->query($sql_views);
+	    $sql_views = "UPDATE board SET views = views + 1 WHERE idx=?";
+        $stmt_views = $mysqli->prepare($sql_views);
+        $stmt_views->bind_param("i", $post_id);
+        $stmt_views->execute();
     }
 
     $likes = false;
     if($user_id){
-        $like_sql = "SELECT 1 FROM post_likes WHERE post_id=$post_id AND user_id='$user_id' LIMIT 1";
-        $like_result = $mysqli->query($like_sql);
+        $like_sql = "SELECT 1 FROM post_likes WHERE post_id=? AND user_id=? LIMIT 1";
+        $stmt_like = $mysqli->prepare($like_sql);
+        $stmt_like->bind_param("is", $post_id, $user_id);
+        $stmt_like->execute();
+        $like_result = $stmt_like->get_result();
         if($like_result && $like_result->fetch_assoc()){
-            $likes =true;
+            $likes = true;
         }
     }
 ?>

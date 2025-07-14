@@ -3,11 +3,25 @@
     require_once $_SERVER['DOCUMENT_ROOT'].'/php/db.php';
     //세션시작 및 만료시간 설정
     require_once $_SERVER['DOCUMENT_ROOT'].'/php/session_guard.php';
+    
+    if (!isset($_SESSION['user_id'])) {
+        echo "<script>
+            alert('로그인이 필요합니다.');
+            location.href='/pages/login.php';
+            </script>";
+            exit;
+        }
+        
     $user_id = $_SESSION['user_id'];
+
     //아이디,이름,주소 DB에서 조회
-    $sql = "SELECT userid,name,address FROM users WHERE userid='$user_id'";
-    $result = $mysqli-> query($sql);
+    $sql = "SELECT userid, name, address FROM users WHERE userid=?";
+    $stmt = $mysqli->prepare($sql);
+    $stmt->bind_param("s", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
     $row = $result->fetch_assoc();
+    $stmt->close();
 ?>
 <!DOCTYPE html>
 <html lang="ko">

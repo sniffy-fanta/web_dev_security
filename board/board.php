@@ -11,22 +11,38 @@
     $search = $_GET['search'];
     $start_date = $_GET['start_date'];
     $end_date = $_GET['end_date'];
+
+     // 화이트리스트 기반 컬럼명 검증
+    $allowed_cols = ['title', 'author', 'content'];
+    if (!in_array($cate, $allowed_cols)) {
+        $cate = 'title';
+    }
     
     //게시글 개수체크
     if($search && $start_date && $end_date){
         //검색어+날짜 둘다
-        $cnt_sql = "SELECT COUNT(*) as cnt FROM board WHERE $cate LIKE '%$search%' AND post_date BETWEEN '$start_date' AND '$end_date'";
+        $cnt_sql = "SELECT COUNT(*) as cnt FROM board WHERE $cate LIKE ? AND post_date BETWEEN ? AND ?";
+        $stmt = $mysqli->prepare($cnt_sql);
+        $search_keyword = "%{$search}%";
+        $stmt->bind_param("sss", $search_keyword, $start_date, $end_date);
     } else if($search){
         //검색어만
-        $cnt_sql = "SELECT COUNT(*) as cnt FROM board WHERE $cate LIKE '%$search%'";
+        $cnt_sql = "SELECT COUNT(*) as cnt FROM board WHERE $cate LIKE ?";
+        $stmt = $mysqli->prepare($cnt_sql);
+        $search_keyword = "%{$search}%";
+        $stmt->bind_param("s", $search_keyword);
     } else if($start_date && $end_date){
         //날짜만
-        $cnt_sql = "SELECT COUNT(*) as cnt FROM board WHERE post_date BETWEEN '$start_date' AND '$end_date'";
+        $cnt_sql = "SELECT COUNT(*) as cnt FROM board WHERE post_date BETWEEN ? AND ?";
+        $stmt = $mysqli->prepare($cnt_sql);
+        $stmt->bind_param("ss", $start_date, $end_date);
     } else {
         //아무것도 없을 때 전체글
         $cnt_sql = "SELECT COUNT(*) as cnt FROM board";
+        $stmt = $mysqli->prepare($cnt_sql);
     }
-    $cnt_res = $mysqli->query($cnt_sql);
+    $stmt->execute();
+    $cnt_res = $stmt->get_result();
     $cnt_row = $cnt_res->fetch_assoc();
 
     $total_post = $cnt_row['cnt'];//총 게시글 수
@@ -94,18 +110,29 @@
         //게시글 목록 출력 체크
         if($search && $start_date && $end_date){
             //검색어+날짜 둘다
-            $sql_page = "SELECT * FROM board WHERE $cate LIKE '%$search%' AND post_date BETWEEN '$start_date' AND '$end_date' ORDER BY idx DESC LIMIT $start, $per_post";
+            $sql_page = "SELECT * FROM board WHERE $cate LIKE ? AND post_date BETWEEN ? AND ? ORDER BY idx DESC LIMIT ?, ?";
+            $stmt = $mysqli->prepare($sql_page);
+            $search_keyword = "%{$search}%";
+            $stmt->bind_param("sssii", $search_keyword, $start_date, $end_date, $start, $per_post);
         } else if($search){
             //검색어만
-            $sql_page = "SELECT * FROM board WHERE $cate LIKE '%$search%' ORDER BY idx DESC LIMIT $start, $per_post";
+            $sql_page = "SELECT * FROM board WHERE $cate LIKE ? ORDER BY idx DESC LIMIT ?, ?";
+            $stmt = $mysqli->prepare($sql_page);
+            $search_keyword = "%{$search}%";
+            $stmt->bind_param("sii", $search_keyword, $start, $per_post);
         } else if($start_date && $end_date){
             //날짜만
-            $sql_page = "SELECT * FROM board WHERE post_date BETWEEN '$start_date' AND '$end_date' ORDER BY idx DESC LIMIT $start, $per_post";
+            $sql_page = "SELECT * FROM board WHERE post_date BETWEEN ? AND ? ORDER BY idx DESC LIMIT ?, ?";
+            $stmt = $mysqli->prepare($sql_page);
+            $stmt->bind_param("ssii", $start_date, $end_date, $start, $per_post);
         } else {
             //아무것도 없을 때 전체글
-            $sql_page = "SELECT * FROM board ORDER BY idx DESC LIMIT $start, $per_post";
+            $sql_page = "SELECT * FROM board ORDER BY idx DESC LIMIT ?, ?";
+            $stmt = $mysqli->prepare($sql_page);
+            $stmt->bind_param("ii", $start, $per_post);
         }
-        $res_page = $mysqli->query($sql_page);
+        $stmt->execute();
+        $res_page = $stmt->get_result();
         while($row = $res_page->fetch_assoc()){
         ?>
             <tr>

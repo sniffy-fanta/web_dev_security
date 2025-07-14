@@ -29,21 +29,28 @@
         if ($error === UPLOAD_ERR_OK) {
             if (move_uploaded_file($tmp_path, $file_path)) {
                 // 파일과 함께 저장
-                $sql = "INSERT INTO board (title,author,content,post_date,file,views,likes) VALUES ('$title','$author','$content',now(),'$unique_filename',0,0)";
-            }else {
+                $sql = "INSERT INTO board (title, author, content, post_date, file, views, likes) VALUES (?, ?, ?, now(), ?, 0, 0)";
+                $stmt = $mysqli->prepare($sql);
+                $stmt->bind_param("ssss", $title, $author, $content, $unique_filename);
+            }
+            else {
                 // 파일 이동 실패 → 파일 없이 저장
-                $sql = "INSERT INTO board (title,author,content,post_date,views,likes) VALUES ('$title','$author','$content',now(),0,0)";
+                $sql = "INSERT INTO board (title, author, content, post_date, views, likes) VALUES (?, ?, ?, now(), 0, 0)";
+                $stmt = $mysqli->prepare($sql);
+                $stmt->bind_param("sss", $title, $author, $content);
             }
         }else if ($error === UPLOAD_ERR_INI_SIZE) {
             echo "<script>alert('파일 사이즈가 너무 큽니다.'); history.back();</script>";
             exit;
         }
     }else {
-    // 파일이 첨부되지 않은 경우
-    $sql = "INSERT INTO board (title,author,content,post_date,views,likes) VALUES ('$title','$author','$content',now(),0,0)";
+        // 파일이 첨부되지 않은 경우
+        $sql = "INSERT INTO board (title, author, content, post_date, views, likes) VALUES (?, ?, ?, now(), 0, 0)";
+        $stmt = $mysqli->prepare($sql);
+        $stmt->bind_param("sss", $title, $author, $content);
     }
 
-    $result = $mysqli->query($sql);
+    $result = $stmt->execute();
         if ($result) {
             echo "<script>
                     alert('게시글이 작성되었습니다.');

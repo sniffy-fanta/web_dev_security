@@ -6,8 +6,11 @@ require_once $_SERVER['DOCUMENT_ROOT'].'/php/db.php';
 $user_id = $_POST['user_id'];
 $user_pw = $_POST['user_pw'];
 //입력받은 아이디의 비밀번호를 DB에서 조회
-$sql = "SELECT userpw FROM users WHERE userid='$user_id'";
-$result = $mysqli->query($sql);
+$sql = "SELECT userpw FROM users WHERE userid= ?";
+$stmt = $mysqli->prepare($sql);
+$stmt->bind_param("s", $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
 
 //$result 는 쿼리가 성공하기만 하면 true이기 때문에 결과가 0개여도 true를 반환
 //$result-> num_rows > 0 은 1개이상의 결과가 있어야 하는데 result가 false라면 실행조차 x

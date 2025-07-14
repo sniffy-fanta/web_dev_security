@@ -10,8 +10,11 @@
 
     if($action === 'check'){
         //중복확인
-        $check_sql= "SELECT userid FROM users WHERE userid='$user_id'";
-        $result_id= $mysqli->query($check_sql);
+        $check_sql= "SELECT userid FROM users WHERE userid=?";
+        $stmt = $mysqli->prepare($check_sql);
+        $stmt->bind_param("s", $user_id);
+        $stmt->execute();
+        $result_id = $stmt->get_result();
         
         if($result_id && $result_id->num_rows > 0){
             //아이디가 존재
@@ -46,8 +49,10 @@
                 exit;
             }
 
-         $sql="INSERT INTO users (userid,userpw,name,address) VALUES ('$user_id','$user_pw','$name','$address')";
-         $result=$mysqli->query($sql);
+         $sql = "INSERT INTO users (userid, userpw, name, address) VALUES (?, ?, ?, ?)";
+         $stmt = $mysqli->prepare($sql);
+         $stmt->bind_param("ssss", $user_id, $user_pw, $name, $address);
+         $result = $stmt->execute();
 
          if($result){
             echo "

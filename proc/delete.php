@@ -11,13 +11,23 @@
             exit;
     }
 
-    //데이터베이스ID와 세션유저ID값이 같다면 해당 행 삭제
-    $sql = "DELETE FROM users WHERE userid='$user_id'";
-    $result = $mysqli->query($sql);
-    $sql = "DELETE FROM post_likes WHERE user_id='$user_id'";
-    $result = $mysqli->query($sql);
-    $sql = "DELETE FROM board WHERE author='$user_id'";
-    $result = $mysqli->query($sql);
+    // users 테이블에서 삭제
+    $stmt = $mysqli->prepare("DELETE FROM users WHERE userid=?");
+    $stmt->bind_param("s", $user_id);
+    $result1 = $stmt->execute();
+    $stmt->close();
+
+    // post_likes 테이블에서 삭제
+    $stmt = $mysqli->prepare("DELETE FROM post_likes WHERE user_id=?");
+    $stmt->bind_param("s", $user_id);
+    $result2 = $stmt->execute();
+    $stmt->close();
+
+    // board 테이블에서 삭제
+    $stmt = $mysqli->prepare("DELETE FROM board WHERE author=?");
+    $stmt->bind_param("s", $user_id);
+    $result3 = $stmt->execute();
+    $stmt->close();
 
     //sql이 실행이 됐다면
     if($result){

@@ -8,8 +8,10 @@
 
 
     // 기존 파일명 조회
-    $query = "SELECT file FROM board WHERE idx = $post_id";
-    $result = $mysqli->query($query);
+    $stmt = $mysqli->prepare("SELECT file FROM board WHERE idx = ?");
+    $stmt->bind_param("i", $post_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
     $row = $result->fetch_assoc();
     $existing_file = $row ? $row['file'] : null;
 
@@ -20,7 +22,8 @@
             unlink($_SERVER['DOCUMENT_ROOT']."/board/uploads/".$existing_file);
         }
         // DB에서 파일 정보 삭제
-        $sql = "UPDATE board SET title='$title', content='$content', file=NULL WHERE idx=$post_id";
+        $stmt = $mysqli->prepare("UPDATE board SET title=?, content=?, file=NULL WHERE idx=?");
+        $stmt->bind_param("ssi", $title, $content, $post_id);
     }
 
     // 파일 업로드 처리
@@ -45,9 +48,11 @@
                 if ($existing_file && file_exists($_SERVER['DOCUMENT_ROOT']."/board/uploads/".$existing_file)) {
                     unlink($_SERVER['DOCUMENT_ROOT']."/board/uploads/".$existing_file);
                 }
-                $sql = "UPDATE board SET title='$title', content='$content', file='$unique_filename' WHERE idx=$post_id";
+                $stmt = $mysqli->prepare("UPDATE board SET title=?, content=?, file=? WHERE idx=?");
+                $stmt->bind_param("sssi", $title, $content, $unique_filename, $post_id);
             } else {
-                $sql = "UPDATE board SET title='$title', content='$content' WHERE idx=$post_id";
+                $stmt = $mysqli->prepare("UPDATE board SET title=?, content=? WHERE idx=?");
+                $stmt->bind_param("ssi", $title, $content, $post_id);
             }
         } else if ($error === UPLOAD_ERR_INI_SIZE) {
             echo "<script>alert('파일 사이즈가 너무 큽니다.'); history.back();</script>";
@@ -56,23 +61,21 @@
     }
     // 파일 변경 없이 텍스트만 수정
     else {
-        $sql = "UPDATE board SET title='$title', content='$content' WHERE idx=$post_id";
+        $stmt = $mysqli->prepare("UPDATE board SET title=?, content=? WHERE idx=?");
+        $stmt->bind_param("ssi", $title, $content, $post_id);
     }
 
     // 마지막에 한 번만 쿼리 실행
-    if ($sql) {
-        $result = $mysqli->query($sql);
-        if ($result) {
-            echo "<script>
-                    alert('게시글이 수정되었습니다.');
-                    location.href='/board/board.php';
-                </script>";
-        } else {
-            echo "<script>
-                    alert('DB 오류가 발생했습니다. 관리자에게 문의하세요.');
-                    history.back();
-                </script>";
-        }
+    if ($stmt && $stmt->execute()) {
+        echo "<script>
+                alert('게시글이 수정되었습니다.');
+                location.href='/board/board.php';
+            </script>";
+    } else {
+        echo "<script>
+                alert('DB 오류가 발생했습니다. 관리자에게 문의하세요.');
+                history.back();
+              </script>";
     }
     exit;
 ?>
