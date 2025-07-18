@@ -2,6 +2,8 @@
     require_once $_SERVER['DOCUMENT_ROOT'].'/php/session_guard.php';
     require_once $_SERVER['DOCUMENT_ROOT'].'/php/db.php';
 
+    $post_id = $_POST['idx'];
+
     $stmt = $mysqli->prepare("SELECT * FROM board WHERE idx = ?");
     $stmt->bind_param("i", $post_id);
     $stmt->execute();
