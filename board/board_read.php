@@ -86,7 +86,7 @@
             <p><?=nl2br(htmlspecialchars($row['content'], ENT_QUOTES, 'UTF-8'))?></p>
         </div>
         <div class="download_file">
-            <a href="/board/uploads/<?= htmlspecialchars($row['file'], ENT_QUOTES, 'UTF-8')?>"download><?= htmlspecialchars($row['file'], ENT_QUOTES, 'UTF-8')?></a>
+            <a href="/board/uploads/<?= htmlspecialchars($row['file'] ?? "", ENT_QUOTES, 'UTF-8')?>"download><?= htmlspecialchars($row['file'] ?? "", ENT_QUOTES, 'UTF-8')?></a>
         </div>
         <?php if($user_id === htmlspecialchars($row['author'], ENT_QUOTES, 'UTF-8')):?>
             <div class="btn3">
