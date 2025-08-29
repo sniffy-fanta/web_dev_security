@@ -7,10 +7,10 @@
         $page = 1;
     }
 
-    $cate = $_GET['cate'];
-    $search = $_GET['search'];
-    $start_date = $_GET['start_date'];
-    $end_date = $_GET['end_date'];
+    $cate = $_GET['cate'] ?? "";
+    $search = $_GET['search'] ?? "";
+    $start_date = $_GET['start_date'] ?? "";
+    $end_date = $_GET['end_date'] ?? "";
 
      // 화이트리스트 기반 컬럼명 검증
     $allowed_cols = ['title', 'author', 'content'];
