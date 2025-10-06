@@ -20,6 +20,12 @@ body {
   color: #333;
 }
 
+.register_box .condition {
+  font-size: 10.5px;
+  color: #777;
+  margin: -4px 0 12px 2px;
+}
+
 #register_btn {
   width: 100%;
   padding: 12px;

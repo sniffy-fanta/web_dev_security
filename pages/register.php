@@ -16,6 +16,7 @@
                 <button type="submit" name="action" value="check" id="check_id">중복확인</button>
 
                 <input type="password" name="user_pw" placeholder="비밀번호" autocomplete="off" required>
+                <p class="condition"> * 비밀번호는 영문, 숫자, 특수문자를 조합하여 10자 이상으로 설정하세요.</p>
                 <input type="text" name="name" placeholder="이름" autocomplete="off" required>
                 <input type="text" name="address" placeholder="주소" autocomplete="off" required>
                 <button type="submit" name="action" value="register" id="register_btn">가입하기</button>
