@@ -2,18 +2,34 @@
     require_once $_SERVER['DOCUMENT_ROOT'].'/php/session_guard.php';
     require_once $_SERVER['DOCUMENT_ROOT'].'/php/db.php';
 
+    session_start();
+
+    //로그인 체크
+    if (!isset($_SESSION['user_id'])) {
+        echo "<script>alert('로그인이 필요합니다.'); location.href='/pages/login.php';</script>";
+        exit;
+    }
+
     $post_id = $_POST['idx'];
     $title = $_POST['title'];
     $content = $_POST['content'];
 
-
-    // 기존 파일명 조회
-    $stmt = $mysqli->prepare("SELECT file FROM board WHERE idx = ?");
+    // 기존 파일명 및 작성자 조회
+    $stmt = $mysqli->prepare("SELECT file,author FROM board WHERE idx = ?");
     $stmt->bind_param("i", $post_id);
     $stmt->execute();
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
     $existing_file = $row ? $row['file'] : null;
+
+    //작성자 확인
+    if($_SESSION['user_id'] != $row['author']){
+        echo "<script>
+                alert('권한이 없습니다');
+                history.back();
+            </script>";
+            exit;
+    }
 
     // 파일 삭제 체크 시
     if (isset($_POST['delete_file']) && $_POST['delete_file'] == '1') {
