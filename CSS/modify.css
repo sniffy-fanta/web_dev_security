@@ -97,6 +97,13 @@ body {
     color: #333;
 }
 
+.table_wrapper .modify_table .condition {
+    font-size: 10.5px;
+    color: #777;
+    margin-top : 8px;
+    margin-bottom : -8px;
+}
+
 .btn {
     margin-top: 30px;
     display: flex;

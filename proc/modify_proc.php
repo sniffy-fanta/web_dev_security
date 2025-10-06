@@ -5,7 +5,20 @@
 
     //수정값 변수에 할당
     $user_id = $_POST['user_id'];
+
+    //비밀번호 유효성 검사
     $user_pw = $_POST['user_pw'];
+    $pw_num = preg_match('/[0-9]/', $user_pw);
+    $pw_alpha = preg_match('/[A-Za-z]/', $user_pw);
+    $pw_special = preg_match('/[!@#$%^&*()_+\-=~]/', $user_pw);
+
+    $pw_count = $pw_num + $pw_alpha + $pw_special;
+
+    if(strlen($user_pw) < 10 || $pw_count < 2){
+        echo "<script>alert('비밀번호는 영문, 숫자, 특수문자를 조합하여 10자 이상으로 설정하세요.'); history.back();</script>";
+            exit;
+    }
+
     $name = $_POST['name'];
     $address = $_POST['address'];
 
