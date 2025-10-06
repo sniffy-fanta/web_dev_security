@@ -60,9 +60,8 @@ if (!isset($_SESSION['temp_user_id'])) {
                     <tr>
                         <th>비밀번호</th>
                         <td>
-                            <input type="password" name="user_pw" value="<?= htmlspecialchars($row['userpw'], ENT_QUOTES, 'UTF-8') ?>" autocomplete="off" readonly onclick="edit(this);">
+                            <input type="password" name="user_pw" autocomplete="off" readonly onclick="edit(this);">
                             <p class="condition"> * 비밀번호는 영문, 숫자, 특수문자를 조합하여 10자 이상으로 설정하세요.</p>
-
                         </td>
                     </tr>
                     <tr>
