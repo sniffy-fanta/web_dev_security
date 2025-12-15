@@ -3,8 +3,11 @@ session_start();
 require_once $_SERVER['DOCUMENT_ROOT'].'/php/db.php';
 
 //입력값 변수에 저장하기
-$user_id = $_POST['user_id'];
-$user_pw = $_POST['user_pw'];
+$user_id = $_POST['user_id'] ?? '';
+$user_pw = $_POST['user_pw'] ?? '';
+
+//로그인 실패 시 마지막으로 시도한 ID 저장
+$_SESSION['last_failed_id'] = $user_id;
 
 //로그인 일반 실패 함수
 function common_failed_login($msg){
@@ -23,27 +26,23 @@ function locked_login($msg){
     exit;
 }
 
-//입력받은 아이디의 비밀번호 및 실패 카운트, 잠금 해제 시간 DB에서 조회
+//입력받은 아이디의, 비밀번호, 실패 카운트, 잠금 해제 시간 DB에서 조회
 $sql = "SELECT userpw, failed_cnt, lock_until FROM users WHERE userid= ?";
 $stmt = $mysqli->prepare($sql);
 $stmt->bind_param("s", $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
-//$result 는 쿼리가 성공하기만 하면 true이기 때문에 결과가 0개여도 true를 반환
-//$result-> num_rows > 0 은 1개이상의 결과가 있어야 하는데 result가 false라면 실행조차 x
+//결과가 없거나 0개라면 실패
 if(!$result || $result->num_rows === 0){
     common_failed_login("아이디 또는 비밀번호가 틀렸습니다.");
 }
 $row = $result->fetch_assoc();
 
 //잠금 상태 확인
-if(!empty($row['lock_until'])){
+if(($row['lock_until']) !== NULL){
     $now = new DateTime('now', new DateTimeZone('UTC')); //현재시간
     $lock_until = new DateTime($row['lock_until'], new DateTimeZone('UTC')); //잠금 해제 시간
-
-    echo $now->format('Y-m-d H:i:s');
-
 
     if($lock_until > $now){
         locked_login("잠금 된 상태입니다. 10분 후 다시 시도해 주세요.");
@@ -51,9 +50,10 @@ if(!empty($row['lock_until'])){
         $update_sql = "UPDATE users SET failed_cnt = 0, lock_until = NULL WHERE userid = ?";
         $upStmt = $mysqli -> prepare($update_sql);
         $upStmt -> bind_param("s", $user_id);
-        $upStmt -> execute();
-
-        $row['failed_cnt'] = 0;
+        $upStmt -> execute(); 
+        
+        unset($_SESSION['login_switch']); 
+        $row['failed_cnt'] = 0; 
         $row['lock_until'] = NULL;
     }
 }
