@@ -76,7 +76,7 @@ if($row['userpw'] === $user_pw) {
 
     if($failed_cnt >= 5){
         // 로그인 5회 이상 실패 (잠금)
-        $locked_sql = "UPDATE users SET failed_cnt = 0, lock_until = (UTC_TIMESTAMP() + INTERVAL 1 MINUTE) WHERE userid = ?";
+        $locked_sql = "UPDATE users SET failed_cnt = 0, lock_until = (UTC_TIMESTAMP() + INTERVAL 10 MINUTE) WHERE userid = ?";
         $lockStmt = $mysqli -> prepare($locked_sql);
         $lockStmt -> bind_param("s", $user_id);
         $lockStmt -> execute();
