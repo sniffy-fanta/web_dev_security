@@ -20,6 +20,12 @@ $stmt->execute();
 $result = $stmt->get_result();
 $row = $result->fetch_assoc();
 
+//CSRF 토큰 생성
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32)); 
+}
+$csrf_token = $_SESSION['csrf_token'];
+
 // 임시세션 temp_user_id 세팅
 if (!isset($_SESSION['temp_user_id'])) {
     $_SESSION['temp_user_id'] = $row['userid'];
@@ -48,6 +54,7 @@ if (!isset($_SESSION['temp_user_id'])) {
     <div class="table_wrapper">
         <div class="modify_container">
             <form action="/proc/modify_proc.php" method="POST">
+                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'], ENT_QUOTES, 'UTF-8') ?>";>
                 <table class="modify_table">
                     <tr>
                         <th>아이디</th>
@@ -58,7 +65,13 @@ if (!isset($_SESSION['temp_user_id'])) {
                         </td>
                     </tr>
                     <tr>
-                        <th>비밀번호</th>
+                        <th>현재 비밀번호</th>
+                        <td>
+                            <input type="password" name="current_user_pw" autocomplete="off" readonly onclick="edit(this);">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>새 비밀번호</th>
                         <td>
                             <input type="password" name="user_pw" autocomplete="off" readonly onclick="edit(this);">
                             <p class="condition"> * 비밀번호는 영문, 숫자, 특수문자를 조합하여 10자 이상으로 설정하세요.</p>

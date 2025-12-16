@@ -3,12 +3,27 @@
     require_once $_SERVER['DOCUMENT_ROOT'].'/php/db.php';
     require_once $_SERVER['DOCUMENT_ROOT'].'/php/session_guard.php';
 
+    //CSRF 토큰 확인
+    if (!isset($_POST['csrf_token']) || !isset($_SESSION['csrf_token']) || $_POST['csrf_token'] !== $_SESSION['csrf_token']) {
+        session_unset();
+        session_destroy(); 
+
+        echo "
+            <script>
+                alert('보안 토큰이 유효하지 않습니다.');
+                location.href='/pages/modify.php';
+            </script>";
+        exit;
+    }
+
     //수정값 변수에 할당
     $user_id = $_POST['user_id'];
+    $current_user_pw = $_POST['current_user_pw'];
+    $user_pw = $_POST['user_pw'];
+    $name = $_POST['name'];
+    $address = $_POST['address'];
 
     //비밀번호 유효성 검사
-    $user_pw = $_POST['user_pw'];
-
     if(!empty($user_pw)){
         $pw_num = preg_match('/[0-9]/', $user_pw);
         $pw_alpha = preg_match('/[A-Za-z]/', $user_pw);
@@ -22,9 +37,7 @@
         }
     }
 
-    $name = $_POST['name'];
-    $address = $_POST['address'];
-
+    //입력 값 유효성 검사
     $error = validation_input($user_id, $user_pw, $name, $address);
     if ($error !== '') {
         echo "<script>alert('$error');
@@ -43,6 +56,12 @@
     $result = $stmt->get_result();
     $row = $result->fetch_assoc();
     $stmt->close();
+
+    //현재 비밀번호 확인
+    if ($current_user_pw !== $row['userpw']) {
+        echo "<script>alert('현재 비밀번호가 일치하지 않습니다.'); history.back();</script>";
+        exit;
+    }
 
     // 아이디가 바뀌었으면 중복확인 했는지 체크
     if ($user_id !== $row['userid']) {
@@ -94,6 +113,9 @@
         $stmt->close();
 
         if($update_result){
+            //수정 성공 시 csrf 토큰 삭제
+            unset($_SESSION['csrf_token']);
+
             if($user_id !== $row['userid']){
                 $_SESSION['user_id'] = $user_id;
                 unset($_SESSION['temp_user_id']);
