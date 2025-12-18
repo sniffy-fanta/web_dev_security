@@ -59,7 +59,7 @@ if(($row['lock_until']) !== NULL){
 }
 
 //비밀번호 비교
-if($row['userpw'] === $user_pw) {
+if(password_verify($user_pw, $row['userpw'])){
     //로그인 성공 (실패 횟수 초기화)
     $success_sql = "UPDATE users SET failed_cnt = 0, lock_until = NULL WHERE userid = ?";
     $suStmt = $mysqli -> prepare($success_sql);

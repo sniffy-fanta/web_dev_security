@@ -65,7 +65,11 @@
 
          $sql = "INSERT INTO users (userid, userpw, name, address) VALUES (?, ?, ?, ?)";
          $stmt = $mysqli->prepare($sql);
-         $stmt->bind_param("ssss", $user_id, $user_pw, $name, $address);
+         
+         //비밀번호 해시 처리
+         $hashed_pw = password_hash($user_pw, PASSWORD_DEFAULT);
+
+         $stmt->bind_param("ssss", $user_id, $hashed_pw, $name, $address);
          $result = $stmt->execute();
 
          if($result){

@@ -58,7 +58,7 @@
     $stmt->close();
 
     //현재 비밀번호 확인
-    if ($current_user_pw !== $row['userpw']) {
+    if (!password_verify($current_user_pw, $row['userpw'])) {
         echo "<script>alert('현재 비밀번호가 일치하지 않습니다.'); history.back();</script>";
         exit;
     }
@@ -85,11 +85,21 @@
         $params[] = $user_id;
         $types .= 's';
     }
-    if($user_pw !== $row['userpw']){
+    if(!empty($user_pw)){
+        //기존 비밀번호와 동일한지 확인
+        if(password_verify($user_pw, $row['userpw'])){
+            echo "<script>
+                alert('기존 비밀번호와 동일한 비밀번호로는 변경할 수 없습니다.');
+                history.back();
+              </script>";
+              exit;
+        }
+        //기존 비밀번호와 동일하지 않는 경우
+        $hashed_pw = password_hash($user_pw, PASSWORD_DEFAULT);
         $update_fields[] = "userpw=?";
-        $params[] = $user_pw;
+        $params[] = $hashed_pw;
         $types .= 's';
-    }
+    } 
     if($name !== $row['name']){
         $update_fields[] = "name=?";
         $params[] = $name;
