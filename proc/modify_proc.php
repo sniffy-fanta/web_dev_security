@@ -38,7 +38,7 @@
     }
 
     //입력 값 유효성 검사
-    $error = validation_input($user_id, $user_pw, $name, $address);
+    $error = validation_input($user_id, $name, $address);
     if ($error !== '') {
         echo "<script>alert('$error');
         history.back();
